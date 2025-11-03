@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    command: gunicorn SmartHospital.wsgi:application --bind 0.0.0.0:8000 --workers 3
+    volumes:
+      - .:/SmartHospital:rw        # <-- match WORKDIR in Dockerfile
+      - static_volume:/vol/static
+      - media_volume:/vol/media
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - DJANGO_SETTINGS_MODULE=SmartHospital.settings
+    restart: on-failure
+
+  # If you switch to Postgres, uncomment and add depends_on: - db under web
+  # db:
+  #   image: postgres:15
+  #   environment:
+  #     POSTGRES_DB: ${POSTGRES_DB:-smartdb}
+  #     POSTGRES_USER: ${POSTGRES_USER:-smartuser}
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-smartpass}
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   restart: unless-stopped
+
+volumes:
+  static_volume:
+  media_volume:
+  # postgres_data:
