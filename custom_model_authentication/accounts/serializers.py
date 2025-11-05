@@ -6,7 +6,7 @@ User = get_user_model()
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
-    user = serializers.StringRelatedField(many = False)
+    # user = serializers.StringRelatedField(many = False)
     class Meta:
         model = UserProfile        
         fields = (
@@ -15,6 +15,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'bio',
             'contact_info',
         )
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 class RegistrationSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(required=True)

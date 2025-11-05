@@ -1,0 +1,314 @@
+// error
+(.venv) imran-rafi@imran-rafi-ASUS-TUF-Gaming-A15-FA507NVR-FA507NVR:~/Desktop/test/django_rest_practice_set/library_management$ python3 manage.py makemigrations; python3 manage.py migrate; python3 manage.py createsuperuser
+SystemCheckError: System check identified some issues:
+
+ERRORS:
+<class 'books.admin.CommentAdmin'>: (admin.E108) The value of 'list_display[1]' refers to 'comment_preview', which is not a callable or attribute of 'CommentAdmin', or an attribute, method, or field on 'books.CommentModel'.
+books.LikeModel: (models.E012) 'unique_together' refers to the nonexistent field 'comment'.
+SystemCheckError: System check identified some issues:
+
+ERRORS:
+<class 'books.admin.CommentAdmin'>: (admin.E108) The value of 'list_display[1]' refers to 'comment_preview', which is not a callable or attribute of 'CommentAdmin', or an attribute, method, or field on 'books.CommentModel'.
+books.LikeModel: (models.E012) 'unique_together' refers to the nonexistent field 'comment'.
+SystemCheckError: System check identified some issues:
+
+ERRORS:
+<class 'books.admin.CommentAdmin'>: (admin.E108) The value of 'list_display[1]' refers to 'comment_preview', which is not a callable or attribute of 'CommentAdmin', or an attribute, method, or field on 'books.CommentModel'.
+books.LikeModel: (models.E012) 'unique_together' refers to the nonexistent field 'comment'.
+(.venv) imran-rafi@imran-rafi-ASUS-TUF-Gaming-A15-FA507NVR-FA507NVR:~/Desktop/test/django_rest_practice_set/library_management$ 
+
+
+admin.py
+from django.contrib import admin
+from .models import (
+    BookModel,
+    CategoryModel,
+    ReviewModel,
+    CommentModel,
+    LikeModel    
+)
+
+
+@admin.register(BookModel)
+class BookAdmin(admin.ModelAdmin):
+    list_display = [
+        'uploader',
+        'title',
+        'author',
+        'price',        
+        'created_at'
+    ]
+    list_filter = [
+        'uploader',
+        'category',
+        'price',
+        'created_at'
+    ]
+    search_fields = [
+        'title',
+        'author',
+        'uploader__username',
+        'description'
+    ]
+    ordering = [
+        '-created_at',
+        'title'
+    ]
+
+
+@admin.register(CategoryModel)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = [
+        'user',
+        'title',
+        'created_at'
+    ]
+    list_filter = [
+        'user',
+        'created_at'
+    ]
+    search_fields = [
+        'title',
+        'user__username'
+    ]
+    ordering = [
+        'created_at'
+    ]
+
+
+@admin.register(ReviewModel)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = [
+        'user',
+        'book',
+        'star',
+        'created_at'
+    ]
+    list_filter = [
+        'user',
+        'star',
+        'created_at'
+    ]
+    search_fields = [
+        'book__title',
+        'user__username',
+        'feedback'
+    ]
+    ordering = [
+        '-created_at'
+    ]
+
+
+@admin.register(CommentModel)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = [
+        'user',        
+        'comment_preview',
+        'created_at'
+    ]
+    list_filter = [
+        'user',
+        'created_at'
+    ]
+    search_fields = [
+        'user__username',
+        'comment',
+        'book__title'
+    ]
+    ordering = [
+        '-created_at'
+    ]
+    
+    def comment_preview(self, obj):
+        return obj.comment[:50] + "..." if len(obj.comment) > 50 else obj.comment
+    comment_preview.short_description = 'Comment'
+
+
+@admin.register(LikeModel)
+class LikeAdmin(admin.ModelAdmin):
+    list_display = [
+        'user',
+        'book',
+        'created_at'
+    ]
+    list_filter = [
+        'user',
+        'created_at'
+    ]
+    search_fields = [
+        'user__username',
+        'book__title'
+    ]
+    ordering = [
+        '-created_at'
+    ]
+
+
+serializer.py
+from rest_framework import serializers
+from .models import (
+    BookModel, 
+    CategoryModel, 
+    ReviewModel, 
+    CommentModel,
+    LikeModel
+)
+
+
+class CategorySerializers(serializers.ModelSerializer):
+    class Meta:
+        model = CategoryModel
+        fields = [
+            'user',
+            'title',
+        ]
+        read_only_fields = [
+            'created_at',
+            'updated_at',
+        ]
+
+class BookSerializers(serializers.ModelSerializer):
+    
+    class Meta:
+        model = BookModel
+        fields = [
+            'uploader',
+            'title',
+            'author',
+            'price',
+            'pdf',
+            'description',
+            'category'
+        ]
+        read_only_fields = [
+            'created_at',
+            'updated_at'
+        ]
+
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReviewModel
+        fields = [
+            'user',
+            'book',
+            'feedback',
+            'star'
+        ]
+        read_only_fields = [
+            'created_at',
+            'updated_at'
+        ]
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommentModel
+        fields = [
+            'user',
+            'book',
+            'comment',
+            'likes'
+        ]
+
+        read_only_fields = [
+            'created_at',
+            'updated_at'
+        ]
+
+class LikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LikeModel
+        fields = [
+            'user',
+            'book',
+            
+        ]
+        read_only_fields = [
+            'created_at',
+            'updated_at'
+        ]
+
+
+
+
+models.py
+
+from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
+# Create your models here.
+
+
+class CategoryModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+
+STAR = (
+    (1, '⭐'),
+    (2, '⭐⭐'),
+    (3, '⭐⭐⭐'),
+    (4, '⭐⭐⭐⭐'),
+    (5, '⭐⭐⭐⭐⭐'),
+)
+
+
+class BookModel(models.Model):
+    uploader = models.ForeignKey(User, on_delete=models.CASCADE)  # Changed to ForeignKey (OneToOne would limit users to one book)
+    
+    # basic book info
+    title = models.CharField(max_length=50)
+    author = models.CharField(max_length=50)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    pdf = models.FileField(upload_to='pdfs/', null=True, blank=True)
+    description = models.TextField()
+
+    # attributes
+    category = models.ManyToManyField(CategoryModel, blank=True)  # Removed null=True (not valid for ManyToMany)
+    created_at = models.DateTimeField(auto_now_add=True)  # Fixed
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return self.title
+    
+
+class ReviewModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(BookModel, on_delete=models.CASCADE)
+    feedback = models.TextField( null=True, blank=True)  # Changed to TextField for longer text
+    star = models.IntegerField(choices=STAR)  # Changed to IntegerField
+    created_at = models.DateTimeField(auto_now_add=True)  # Fixed
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Review by {self.user.username} for {self.book.title}"  # Fixed: was returning non-existent field
+    
+    class Meta:
+        unique_together = ('user', 'book')  # Prevent multiple reviews by same user for same book
+
+class CommentModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(BookModel, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=500)
+    created_at = models.DateTimeField(auto_now_add=timezone.now())
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return self.comment
+
+class LikeModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(BookModel, on_delete=models.CASCADE)  # Changed to ForeignKey
+    created_at = models.DateTimeField(auto_now_add=True)  # Fixed
+    
+    def __str__(self):
+        return f"{self.user.username} likes comment {self.book.id}"
+    
+    class Meta:
+        unique_together = ('user', 'comment')  # Prevent duplicate likes

@@ -63,4 +63,4 @@ class UserProfile(models.Model):
     contact_info = models.CharField(max_length=11, null=True, blank=True)
 
     def __str__(self):
-        return f'{self.user.name}' or f'{self.user.email}' 
+        return 'profile done'

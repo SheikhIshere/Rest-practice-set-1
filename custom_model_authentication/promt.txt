@@ -1,0 +1,508 @@
+the error i am getting is
+from terminal:
+nternal Server Error: /profile/
+Traceback (most recent call last):
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: NOT NULL constraint failed: accounts_userprofile.user_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 19, in create
+    self.perform_create(serializer)
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/rest_framework/mixins.py", line 24, in perform_create
+    serializer.save()
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 210, in save
+    self.instance = self.create(validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 991, in create
+    instance = ModelClass._default_manager.create(**validated_data)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/models/query.py", line 663, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/models/base.py", line 902, in save
+    self.save_base(
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/models/base.py", line 1008, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/models/base.py", line 1210, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/models/query.py", line 1868, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1882, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: NOT NULL constraint failed: accounts_userprofile.user_id
+[04/Nov/2025 17:34:02] "POST /profile/ HTTP/1.1" 500 212788
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/accounts/models.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+
+
+web:
+IntegrityError at /profile/
+NOT NULL constraint failed: accounts_userprofile.user_id
+Request Method:	POST
+Request URL:	http://127.0.0.1:8001/profile/
+Django Version:	5.2.7
+Exception Type:	IntegrityError
+Exception Value:	
+NOT NULL constraint failed: accounts_userprofile.user_id
+Exception Location:	/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py, line 360, in execute
+Raised during:	accounts.views.UserprofileView
+Python Executable:	/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/bin/python3
+Python Version:	3.12.3
+Python Path:	
+['/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication',
+ '/usr/lib/python312.zip',
+ '/usr/lib/python3.12',
+ '/usr/lib/python3.12/lib-dynload',
+ '/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages']
+Server time:	Tue, 04 Nov 2025 17:34:02 +0000
+Traceback Switch to copy-and-paste view
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/backends/utils.py, line 105, in _execute
+                return self.cursor.execute(sql, params)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py, line 360, in execute
+        return super().execute(query, params)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+The above exception (NOT NULL constraint failed: accounts_userprofile.user_id) was the direct cause of the following exception:
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/core/handlers/exception.py, line 55, in inner
+                response = get_response(request)
+                               ^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/core/handlers/base.py, line 197, in _get_response
+                response = wrapped_callback(request, *callback_args, **callback_kwargs)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/views/decorators/csrf.py, line 65, in _view_wrapper
+            return view_func(request, *args, **kwargs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/rest_framework/viewsets.py, line 125, in view
+            return self.dispatch(request, *args, **kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/rest_framework/views.py, line 515, in dispatch
+            response = self.handle_exception(exc)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/rest_framework/views.py, line 475, in handle_exception
+            self.raise_uncaught_exception(exc)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/rest_framework/views.py, line 486, in raise_uncaught_exception
+        raise exc
+             ^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/rest_framework/views.py, line 512, in dispatch
+            response = handler(request, *args, **kwargs)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/rest_framework/mixins.py, line 19, in create
+        self.perform_create(serializer)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/rest_framework/mixins.py, line 24, in perform_create
+        serializer.save()
+            ^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/rest_framework/serializers.py, line 210, in save
+            self.instance = self.create(validated_data)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/rest_framework/serializers.py, line 991, in create
+            instance = ModelClass._default_manager.create(**validated_data)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/models/manager.py, line 87, in manager_method
+                return getattr(self.get_queryset(), name)(*args, **kwargs)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/models/query.py, line 663, in create
+        obj.save(force_insert=True, using=self.db)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/models/base.py, line 902, in save
+        self.save_base(
+             ^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/models/base.py, line 1008, in save_base
+            updated = self._save_table(
+                             …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/models/base.py, line 1169, in _save_table
+            results = self._do_insert(
+                             …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/models/base.py, line 1210, in _do_insert
+        return manager._insert(
+                      …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/models/manager.py, line 87, in manager_method
+                return getattr(self.get_queryset(), name)(*args, **kwargs)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/models/query.py, line 1868, in _insert
+        return query.get_compiler(using=using).execute_sql(returning_fields)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py, line 1882, in execute_sql
+                cursor.execute(sql, params)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/backends/utils.py, line 122, in execute
+            return super().execute(sql, params)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/backends/utils.py, line 79, in execute
+        return self._execute_with_wrappers(
+                    …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/backends/utils.py, line 92, in _execute_with_wrappers
+        return executor(sql, params, many, context)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/backends/utils.py, line 100, in _execute
+        with self.db.wrap_database_errors:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/utils.py, line 91, in __exit__
+                raise dj_exc_value.with_traceback(traceback) from exc_value
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/backends/utils.py, line 105, in _execute
+                return self.cursor.execute(sql, params)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/imran-rafi/Desktop/test/django_rest_practice_set/custom_model_authentication/.venv/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py, line 360, in execute
+        return super().execute(query, params)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+Request information
+
+
+models.py:
+from django.db import models
+from django.contrib.auth.models import(
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin
+)
+from django.utils import timezone
+# Create your models here.
+
+class UserManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('Users must have an email address')        
+        user = self.model(email=self.normalize_email(email), **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+
+        return user
+    
+    def create_superuser(self, email, password, **extra_fields):
+        # defining the extra fields
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_active', True)
+
+        # check if the user is superuser
+        if not extra_fields.get('is_staff'):
+            raise ValueError('go off you are not a staff')
+        
+        if not extra_fields.get('is_superuser'):
+            raise ValueError('go off you are not a superuser')
+
+        save = self.create_user(email, password, **extra_fields)
+        return save
+    
+
+
+class User(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(max_length=255, unique=True)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+
+    # for admin
+    is_active = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    create_at = models.DateTimeField(auto_now_add=timezone.now())
+
+    
+    objects = UserManager()
+
+    USERNAME_FIELD = 'email'
+    # REQUIRED_FIELDS = ['email']
+    def __str__(self):
+        return f'{self.first_name + " " + self.last_name}' or self.email
+
+    
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_pic = models.ImageField(upload_to='profile_pics', null=True, blank=True)
+    bio = models.CharField(max_length=500, null=True, blank=True)
+    contact_info = models.CharField(max_length=11, null=True, blank=True)
+
+    def __str__(self):
+        return 'profile done'
+
+
+serializers.py:
+from rest_framework import serializers
+from django.contrib.auth import get_user_model
+from .models import UserProfile
+
+User = get_user_model()
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    # user = serializers.StringRelatedField(many = False)
+    class Meta:
+        model = UserProfile        
+        fields = (
+            'user',
+            'profile_pic',
+            'bio',
+            'contact_info',
+        )
+
+class RegistrationSerializer(serializers.ModelSerializer):
+    confirm_password = serializers.CharField(required=True)
+
+    class Meta:
+        model = User
+        fields = (
+            'email',
+            'first_name',
+            'last_name',
+            'password',
+            'confirm_password',
+        )
+
+    # validation check
+    def save(self):
+        first_name = self.validated_data['first_name']
+        last_name = self.validated_data['last_name']
+        email = self.validated_data['email']
+        password = self.validated_data['password']
+        confirm_password = self.validated_data['confirm_password']
+        
+        if password == confirm_password:
+            user = User(first_name=first_name, last_name=last_name, email=email)
+            user.set_password(password)
+            user.is_active = False
+            user.save()
+            return user
+        else:
+            raise serializers.ValidationError("Passwords do not match")
+        
+class UserLoginSerializer(serializers.Serializer):
+    email = serializers.CharField(required=True)
+    password = serializers.CharField(required=True)
+
+
+views.py:
+# authentication related imports 
+from django.contrib.auth import(
+    authenticate,
+    login,
+    logout,
+    get_user_model
+)
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated
+
+# core rest framework imports
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import viewsets, status
+
+# local imports
+from .serializers import(
+    RegistrationSerializer,
+    UserLoginSerializer,
+    UserProfileSerializer
+)
+from .models import UserProfile
+
+# django redirecting
+from django.shortcuts import redirect
+
+# user model
+User = get_user_model()
+
+# for sending mail
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import (
+    urlsafe_base64_encode, 
+    urlsafe_base64_decode
+)
+from django.utils.encoding import force_bytes
+from django.core.mail import EmailMultiAlternatives
+from django.conf import settings
+from django.template.loader import render_to_string
+
+
+
+
+
+# user Profile view class 
+class UserprofileView(viewsets.ModelViewSet):
+    # permission_classes = [IsAuthenticated]
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+
+
+# user registration view class
+class UserRegistrationView(APIView):
+    serializer_class = RegistrationSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+
+            # just creating token here 
+            user = serializer.save()
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            confirm_link = f'http://127.0.0.1:8000/activate/{uid}/{token}'
+
+            # sending mail
+            name = user.first_name + ' ' + user.last_name
+            email_subject = 'Confirm Your Email Address'
+            email_body = render_to_string(
+                'mail/confirmaiton_mail.html', 
+                {
+                    # passing context for the email
+                    'name': name, 
+                    'confirm_link': confirm_link
+                }
+            )
+                
+            email = EmailMultiAlternatives(
+                email_subject,
+                '',
+                to=[user.email],
+            )
+            email.attach_alternative(
+                email_body,
+                'text/html'
+            )
+            email.send()
+
+        return Response(serializer.errors)            
+
+def activating_account(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist) as e:
+        # for debugging only
+        print(e)
+        user = None
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        return redirect('login')
+    else:
+        return redirect('register')
+    
+class UserLoginView(APIView):
+    serializer_class = UserLoginSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+
+        if serializer.is_valid():
+            email = serializer.validated_data['email']
+            password = serializer.validated_data['password']
+
+            # doing authentication
+            user = authenticate(email=email, password=password)
+
+            if user:
+                token = Token.objects.get_or_create(user=user)
+                login(request, user)
+                return Response({
+                    'token': token.key,
+                    'user': user.email
+                })
+            else:
+                return Response({
+                    'error': 'Invalid credentials'
+                })    
+
+        return Response(serializer.errors)
+
+
+# doing logout 
+class UserLogoutView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        request.user.auth_token.delete()
+        logout(request)
+        return Response(status=status.HTTP_200_OK)

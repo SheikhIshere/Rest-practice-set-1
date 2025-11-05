@@ -109,24 +109,33 @@ class UserLoginView(APIView):
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
 
-        if serializer.is_valid():
+        if serializer.is_valid():            
             email = serializer.validated_data['email']
             password = serializer.validated_data['password']
-
             # doing authentication
-            user = authenticate(email=email, password=password)
+            if User.objects.filter(email=email).exists(): #can i use this :  or User.objects.filter(email=email) == 'admin@gmail.com'
+                user = authenticate(email=email, password=password)
+                if user:       
+                    try:          
+                        token, created = Token.objects.get_or_create(user=user)
+                        login(request, user)
+                        return Response({
+                            'token': token.key,
+                            'user': user.email
+                        })
+                    except:
+                        return Response({
+                            'error': 'account is not active yet'
+                        })
+                else:
+                    return Response({
+                        'error': 'Invalid credentials'
+                    })    
 
-            if user:
-                token = Token.objects.get_or_create(user=user)
-                login(request, user)
-                return Response({
-                    'token': token.key,
-                    'user': user.email
-                })
             else:
                 return Response({
-                    'error': 'Invalid credentials'
-                })    
+                    'error': 'User not register yet'
+                })
 
         return Response(serializer.errors)
 
